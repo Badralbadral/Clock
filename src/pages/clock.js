@@ -1,5 +1,4 @@
 import { useState } from "react";
-`use client`;
 
 export default function Home() {
   let time = new Date().toLocaleTimeString();
