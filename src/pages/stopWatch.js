@@ -65,7 +65,7 @@ export default function StopWatch() {
     );
   }
   return (
-    <div className=" h-[424px] mt-2 flex justify-center items-center flex-col text-2xl">
+    <div className="h-[424px] mt-2 flex justify-center items-center flex-col text-2xl">
       <p className="text-4xl text-gray-200">
         {hour >= 10 ? hour : `0` + hour} : {minut >= 10 ? minut : `0` + minut} :{" "}
         {second >= 10 ? second : `0` + second} :{" "}
@@ -77,7 +77,7 @@ export default function StopWatch() {
             onClick={() => {
               start();
             }}
-            className="bg-gray-700 text-cyan-300 rounded-[50px] px-5 py-[26px] "
+            className="bg-gray-700 text-cyan-300 rounded-[50px] px-5 py-[26px]"
           >
             Start
           </button>
