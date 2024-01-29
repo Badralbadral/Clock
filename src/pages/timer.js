@@ -26,6 +26,12 @@ export default function Timer() {
         if (minut == 59 && second == 59) {
           setHour((hour = hour - 1));
         }
+        if (minut == 0 && second == 0) {
+          setHour((hour = hour - 1));
+        }
+        if (second == 0 && minut == 0 && hour == 0) {
+          clearInterval(interv);
+        }
       }, 1000)
     );
     setBegin(true);
