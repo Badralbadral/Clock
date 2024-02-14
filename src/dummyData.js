@@ -1,9 +1,9 @@
 function hoursArray() {
-  return Array.from({ length: 99 }, (_, index) => index + 1);
+  return Array.from({ length: 100 }, (_, index) => index);
 }
 
 function minutAndSecondsArray() {
-  return Array.from({ length: 59 }, (_, index) => index + 1);
+  return Array.from({ length: 60 }, (_, index) => index);
 }
 
 export const hourArray = hoursArray();
