@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { hourArray } from "@/dummyData";
-import { minAndSecArray } from "@/dummyData";
+import { hourArray, minAndSecArray } from "@/dummyData";
 
 export default function Timer() {
   let [second, setSecond] = useState(0);
@@ -10,11 +9,13 @@ export default function Timer() {
   const [interv, setInterv] = useState();
   const [begin, setBegin] = useState();
   const [stoped, setStoped] = useState(false);
+  const [ended, setEnded] = useState(false);
 
   const [secondZero, setSecondZero] = useState(0);
   const [minutZero, setMinutZero] = useState(0);
   const [hourZero, setHourZero] = useState(0);
 
+  // let sound = new Audio(`./sounds/mixkit-warning-alarm-buzzer-991.wav`);
   function start() {
     setInterv(
       setInterval(() => {
@@ -31,6 +32,7 @@ export default function Timer() {
         }
         if (second == 0 && minut == 0 && hour == 0) {
           clearInterval(interv);
+          setEnded(true);
         }
       }, 1000)
     );
@@ -51,6 +53,7 @@ export default function Timer() {
     clearInterval(interv);
     setBegin(false);
     setStoped(false);
+    setEnded(false);
   }
 
   function resume() {
@@ -70,6 +73,7 @@ export default function Timer() {
         }
         if (second == 0 && minut == 0 && hour == 0) {
           clearInterval(interv);
+          setEnded(true);
         }
       }, 1000)
     );
@@ -153,7 +157,34 @@ export default function Timer() {
         {hour >= 10 ? hour : `0` + hour} : {minut >= 10 ? minut : `0` + minut} :{" "}
         {second >= 10 ? second : `0` + second}
       </p>
-      <div className="flex gap-5 mt-20">
+      <div className={`flex gap-5 mt-20 `}>
+        <button
+          onClick={cancel}
+          className={`${
+            !ended ? "hidden" : "block"
+          } bg-gray-700 text-white rounded-[50px] px-[22px] py-[22px] active:bg-gray-100 duration-100 relative left-[10px]`}
+        >
+          {/* <embed
+            src="./sounds/mixkit-warning-alarm-buzzer-991.wav"
+            loop="true"
+            hidden="true"
+            autostart="true"
+          ></embed> */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.7}
+            stroke="currentColor"
+            className="w-10 h-10"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
         {!begin ? (
           <button
             onClick={() => {
@@ -169,13 +200,17 @@ export default function Timer() {
               onClick={() => {
                 stop();
               }}
-              className="bg-gray-700 text-red-400 rounded-[50px] px-5 py-[26px] active:bg-red-500 duration-100"
+              className={`${
+                !ended ? "block" : "hidden"
+              } bg-gray-700 text-red-400 rounded-[50px] px-5 py-[26px] active:bg-red-500 duration-100`}
             >
               Pause
             </button>
             <button
               onClick={cancel}
-              className="bg-gray-700 text-gray-200 rounded-[50px] px-5 py-[26px] active:bg-gray-100 duration-100"
+              className={`${
+                !ended ? "block" : "hidden"
+              } bg-gray-700 text-gray-200 rounded-[50px] px-5 py-[26px] active:bg-gray-100 duration-100`}
             >
               Cancel
             </button>
@@ -194,7 +229,7 @@ export default function Timer() {
               onClick={() => {
                 cancel();
               }}
-              className="bg-gray-700 text-gray-200 rounded-[50px] px-5 py-[26px] active:bg-gray-100 duration-100"
+              className={`bg-gray-700 text-gray-200 rounded-[50px] px-5 py-[26px] active:bg-gray-100 duration-100`}
             >
               Cancel
             </button>
@@ -204,3 +239,4 @@ export default function Timer() {
     </div>
   );
 }
+// ${!ended ? "block" : "hidden"}
